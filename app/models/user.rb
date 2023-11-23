@@ -5,4 +5,5 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
          
   enum :role, [:admin, :customer, :delivery_partner]       
+  has_many :shipments
 end

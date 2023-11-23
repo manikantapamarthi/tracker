@@ -1,4 +1,5 @@
 class Admin::UsersController < ApplicationController
+  before_action :authenticate_user!
   before_action :get_user, only: [:show, :edit, :destroy]
   def new
     @user = User.new

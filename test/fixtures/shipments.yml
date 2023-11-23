@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  source_location: MyString
+  target_location: MyString
+  item_description: MyText
+  status: 
+
+two:
+  source_location: MyString
+  target_location: MyString
+  item_description: MyText
+  status: 
