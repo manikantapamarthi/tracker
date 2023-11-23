@@ -1,0 +1,21 @@
+<%= form_with(model: [:admin, user] , remote: true) do |f| %>
+  <div class="form-group mb-3 col-sm-6">
+    <%= f.label :email, class: "form-label" %>
+    <%= f.email_field :email, class: "form-control" %>
+  </div>
+  <div class="form-group mb-3 col-sm-6">
+    <%= f.label :role %>
+    <%= f.select(:role, User.roles.keys.map {|r| [r.humanize, r]},{},class: 'form-select' )%>
+  </div>
+   <div class="form-group mb-3 col-sm-6">
+    <%= f.label :password, class: "form-label" %>
+    <%= f.password_field :password, class: "form-control" %>
+  </div>
+  <div class="form-group mb-3 col-sm-6">
+    <%= f.label :password_confirmation %>
+    <%= f.password_field :password_confirmation, class: "form-control" %>
+  </div>
+  <div class="form-group">
+    <%= f.submit "create", class: "btn btn-primary" %>
+  </div>
+<% end %>
