@@ -1,7 +1,10 @@
-<div class="row">
-  Email: <%= @user.email %>
+<div class="card mt-5 mb-5" style="width: 25rem;">
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">Name: <%= @user.first_name %> <%= @user.last_name %></li>
+    <li class="list-group-item">Email: <%= @user.email %></li>
+    <li class="list-group-item">Role: <%= @user.role %></li>
+  </ul>
 </div>
 
-<div class="row">
- role: <%= @user.role %>
-</div>
+<%= link_to "Users", admin_users_path, class: "btn btn-primary" %> |
+<%= link_to "Edit", edit_admin_user_path(@user), class: "btn btn-secondary" %>

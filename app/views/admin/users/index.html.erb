@@ -1,18 +1,43 @@
-<table class="table">
-  <thead>
-    <tr>
-      <th>Email</th>
-      <th>Role</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @users.each do |user| %>
-    <tr>
+
+<div class="d-flex mt-3 justify-content-between">
+  <h2>Users</h2>
+  <div>
+    <%= form_with(url: admin_users_path, method: :get, data: { turbo_frame: "users", 
+    controller: "search",
+    "search-target": "form"}) do |f| %>
+      <div class="input-group"> 
+        <%= f.search_field :query, class: "form-control mr-2", placeholder: "Search", data: {action: "input->search#search"} %>
+        <%#= f.submit "Search", class: "btn btn-primary ml-5", name: nil %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<turbo-frame id="users">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Role</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+      <tr>
+        <td><%= user&.first_name %></td>
+        <td><%= user&.last_name %></td>
         <td><%= user.email %></td>
         <td><%= user.role %></td>
-        <td><%= link_to "Edit" %> <%= link_to "Delete" %></td>
-    </tr>
-    <% end %>
-  </tbody>
-</table>
+        <td><%= link_to "Edit", edit_admin_user_path(user), class: "btn btn-primary" %> 
+            
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+</turbo-frame>
+
+<%= link_to "New User", new_admin_user_path, class: "btn btn-primary" %>

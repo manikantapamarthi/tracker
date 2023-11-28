@@ -1,0 +1,22 @@
+<div class="vh-100 d-flex align-items-center justify-content-center">
+  <div class="row">
+    <h1>Welcome to Dashboard</h1>
+    <p>you can check your shipments <%= link_to "here", shipments_path %></p>
+  </div>
+</div>
+
+
+
+
+<section class="text-center m-5">
+  <h1 class="text-center" >Welcome To Tacker</h1>
+  <% if current_user %>
+      <h5><%= current_user.email %></h5>
+  <%end%>
+  <%=
+      link_to_if(current_user.nil?, "Login", new_user_session_path, class: 'btn btn-primary m-5') do
+          link_to('Sign out',   destroy_user_session_path, :method => 'delete', class: 'btn btn-danger m-5')
+      end
+  %>
+
+</section>

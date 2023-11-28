@@ -1,3 +1,12 @@
-<div class="vh-100 d-flex align-items-center justify-content-center">
-  <h1>Welcome</h1>
-</div>
+<section class="text-center m-5">
+  <h1 class="text-center" >Welcome To Tacker</h1>
+  <% if current_user %>
+    <h5><%= current_user.email %></h5>
+    <p>you can check your shipments <%= link_to "here", shipments_path %></p>
+  <%end%>
+  <%=
+      link_to_if(current_user.nil?, "Login", new_user_session_path, class: 'btn btn-primary m-5') do
+    link_to('Sign out', destroy_user_session_path, data: { turbo_method: :"delete" }, class: 'btn btn-danger m-5')
+      end
+  %>
+</section>

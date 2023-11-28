@@ -11,3 +11,15 @@ user.email = "admin@track.com"
 user.password = "test123"
 user.password_confirmation = "test123"
 user.save!
+
+
+
+#delivary_partner
+user = User.new
+user.first_name = "delivary"
+user.last_name = "partner"
+user.email = "dp1@track.com"
+user.role = "delivery_partner"
+user.password = "test123"
+user.password_confirmation = "test123"
+user.save!

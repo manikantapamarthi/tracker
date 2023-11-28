@@ -12,5 +12,10 @@ Rails.application.routes.draw do
   end
   
   get "/customer", to: "customers#index"
-  resources :shipments
+  get "/delivery_partner", to: "delivery_partners#index"
+  
+  resources :shipments do
+    get :get_status, on: :member
+    get :track, on: :member
+  end
 end

@@ -1,0 +1,57 @@
+<div class="row mt-4">
+  <div class="col-sm">
+    <h2>Shipments</h2>
+  </div>
+  <div class="col-md-4">
+    <%= form_with(url: shipments_path, method: :get, data: { turbo_frame: "shipments", 
+    controller: "search",
+    "search-target": "form"}) do |f| %>
+      <div class="form-group"> 
+        <%= f.search_field :query, class: "form-control mr-2", placeholder: "Search", data: {action: "input->search#search"} %>
+      </div>
+    <% end %>
+  </div>
+</div>
+<hr/>
+<turbo-frame id="shipments">
+  <% if @shipments.present? %>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Shiment Id</th>
+          <th>Pickup location</th>
+          <th>Target Location</th>
+          <th>Item Description</th>
+          <th>Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <%- @shipments.each do |shipment| %>
+          <tr>
+            <td><%= shipment.order_id %></td>
+            <td><%= shipment.source_location %></td>
+            <td><%= shipment.target_location %></td>
+            <td><%= shipment.item_description %></td>
+            <td>
+              <%= form_with model: shipment do |f| %> 
+                <turbo-frame id="status_<%=shipment.id %>">
+                  <%= render 'status', shipment: shipment %>
+                </turbo-frame>
+              <% end %>
+            </td>
+            <td>
+              <%= link_to_if(current_user.customer?, "Edit", edit_shipment_path(shipment), class: "btn btn-primary", data: {turbo: false} ) %> |
+              <%= link_to "Status", shipment_path(shipment), class: "btn btn-secondary", data: {turbo: false} %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <h3 class="text-center">No shipments</h3>
+  <% end %>
+</turbo-frame>  
+
+<%= link_to "New Shipment", new_shipment_path, class: "btn btn-primary" if current_user.customer?%>

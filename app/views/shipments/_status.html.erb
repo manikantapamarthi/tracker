@@ -1,0 +1,3 @@
+
+<%= shipment.status %>
+<%= link_to "Update status", get_status_shipment_path(shipment), class: "btn" if current_user.delivery_partner? %>

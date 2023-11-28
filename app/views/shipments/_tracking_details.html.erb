@@ -1,0 +1,7 @@
+<div class="progress">
+  <div class="progress-bar bg-info" role="progressbar" style="width: <%= calculate_progress(shipment.status) %>%;" aria-valuenow="<%= calculate_progress(shipment.status) %>" aria-valuemin="0" aria-valuemax="100"><%= shipment.status.humanize %></div>
+</div>
+<div class="d-flex justify-content-between mb-5">  
+  <p class="font-weight-bold">Pending</p>
+  <p class="font-weight-bold">Delivered</p>
+</div>  

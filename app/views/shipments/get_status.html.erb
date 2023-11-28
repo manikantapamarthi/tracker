@@ -1,0 +1,8 @@
+<%= form_with(model: @shipment, remote: true) do |f| %>
+  <turbo-frame id="status_<%= @shipment.id %>">
+    <div class="form-group mb-3 col-md-7">
+      <%= f.select :status, Shipment.statuses.map {|k, v| [k.humanize, k]},{}, class: "form-select mb-2" %>
+      <%= f.button "update", class: "btn btn-primary" %>
+    </div>
+  </turbo-frame>
+<% end %>

@@ -1,0 +1,29 @@
+<%= form_with(model: shipment, data: {turbo: false}) do |f| %>
+
+  <% if shipment.errors.any? %>
+    <ul>
+      <% shipment.errors.full_messages.each do |msg| %>
+        <li class="text-danger"><%= msg %></li>
+      <% end %>
+    </ul>
+  <% end %>
+  <div class="form-group mt-3 mb-3 col-md-6">
+    <%= f.label :start_location  %>
+    <%= f.text_area :source_location, class: 'form-control' %>
+  </div>
+  <div class="form-group mb-3 col-md-6">
+    <%= f.label :end_location  %>
+    <%= f.text_area :target_location, class: 'form-control' %>
+  </div>
+  <div class="form-group mb-3 col-md-6">
+    <%= f.label :discription %>
+    <%= f.text_area :item_description, class: 'form-control' %>
+  </div>
+  <div class="form-group mb-3 col-md-6">
+    <%= f.label :delivery_partner %>
+    <%= f.select :delivery_partner_id, User.delivery_partner.map {|user| [user.first_name, user.id]},{}, class: "form-select" %>
+  </div>
+  <div class="form-group mb-3 col-md-6">
+    <%= f.submit  class: "btn btn-primary" %>
+  </div>
+<% end %>

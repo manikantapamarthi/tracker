@@ -10,15 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_23_162158) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_27_134636) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "shipments", force: :cascade do |t|
+    t.string "order_id"
     t.string "source_location"
     t.string "target_location"
     t.text "item_description"
-    t.jsonb "status", default: "{status: \"\", location: \"\"}"
+    t.integer "status", default: 0
     t.bigint "customer_id"
     t.bigint "delivery_partner_id"
     t.datetime "created_at", null: false
@@ -36,6 +37,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_23_162158) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "role", default: 0
+    t.string "first_name"
+    t.string "last_name"
+    t.string "phone_number"
+    t.boolean "is_active", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

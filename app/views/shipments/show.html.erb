@@ -1,0 +1,25 @@
+<h2 class="text-center">Shipment Details</h2>
+
+<div class="row">
+  <p class="col-sm-2">ShipmentId:</p>
+  <p class="col"><%= @shipment.order_id %></p>
+</div>
+
+<div class="row">
+  <p class="col-sm-2">Pickup Loacation: </p>
+  <p class="col"><%= @shipment.source_location %></p>
+</div>
+
+<div class="row">
+  <p class="col-sm-2">Target Loacation: </p>
+  <p class="col"><%= @shipment.target_location %></p>
+</div>
+
+<div class="row">
+  <p class="col-sm-2">Item Description </p>
+  <p class="col"><%= @shipment.item_description %></p>
+</div>
+
+<%= render 'tracking_details', shipment: @shipment %>
+
+<%= link_to "Shipments", shipments_path, class: "btn btn-primary" %>
