@@ -1,0 +1,5 @@
+ <% if user.is_active %>
+  <%= link_to "Deactivate", in_activate_user_admin_user_path(user),data: {"turbo-method": :patch}, class: "btn btn-danger" %>
+<% else %>
+  <%= link_to "Activate", activate_user_admin_user_path(user),data: {"turbo-method": :patch}, class: "btn btn-primary" %>
+<% end %>

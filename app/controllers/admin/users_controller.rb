@@ -1,6 +1,6 @@
 class Admin::UsersController < ApplicationController
   before_action :authenticate_user!
-  before_action :get_user, only: [:show, :edit, :update, :destroy]
+  before_action :get_user, except: [:new, :create, :index]
 
 
   def new
@@ -59,6 +59,32 @@ class Admin::UsersController < ApplicationController
 
   def destroy
     authorize @user
+  end
+
+  def activate_user
+    @user.update_attribute(:is_active, true)
+    respond_to do |format|
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.replace(
+            "user_#{@user.id}",
+            partial: 'admin/users/active_buttons',
+            locals: { user: @user }
+          ) 
+      end
+    end
+  end
+
+  def in_activate_user
+    @user.update_attribute(:is_active, false)
+    respond_to do |format|
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.replace(
+            "user_#{@user.id}",
+            partial: 'admin/users/active_buttons',
+            locals: { user: @user }
+          ) 
+      end
+    end
   end
 
   private

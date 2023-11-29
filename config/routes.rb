@@ -7,9 +7,14 @@ Rails.application.routes.draw do
 
 
   namespace :admin do 
-    resources :users
+    resources :users do
+      patch 'activate_user', on: :member
+      patch 'in_activate_user', on: :member 
+    end
     get '/dashboard', to: "dashboard#index"
   end
+
+
   
   get "/customer", to: "customers#index"
   get "/delivery_partner", to: "delivery_partners#index"
