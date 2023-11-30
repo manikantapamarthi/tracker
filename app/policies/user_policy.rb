@@ -20,6 +20,10 @@ class UserPolicy < ApplicationPolicy
     edit?
   end
 
+  def show?
+    user.admin?
+  end
+
   def destroy?
     user.admin?
   end

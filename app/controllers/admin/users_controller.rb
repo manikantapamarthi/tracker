@@ -2,7 +2,6 @@ class Admin::UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :get_user, except: [:new, :create, :index]
 
-
   def new
     @user = User.new
     authorize @user
@@ -14,6 +13,7 @@ class Admin::UsersController < ApplicationController
     else
       @users = User.all
     end
+    @pagy, @users = pagy(@users)
     authorize @users
   end
 
@@ -65,7 +65,7 @@ class Admin::UsersController < ApplicationController
     @user.update_attribute(:is_active, true)
     respond_to do |format|
       format.turbo_stream do
-        render turbo_stream: turbo_stream.replace(
+        render turbo_stream: turbo_stream.update(
             "user_#{@user.id}",
             partial: 'admin/users/active_buttons',
             locals: { user: @user }
@@ -78,7 +78,7 @@ class Admin::UsersController < ApplicationController
     @user.update_attribute(:is_active, false)
     respond_to do |format|
       format.turbo_stream do
-        render turbo_stream: turbo_stream.replace(
+        render turbo_stream: turbo_stream.update(
             "user_#{@user.id}",
             partial: 'admin/users/active_buttons',
             locals: { user: @user }

@@ -1,29 +1,56 @@
-<h2>Sign up</h2>
+<h2 class="text-center m-5">Sign up</h2>
+<div class="col-8 offset-2 col-sm-6 offset-sm-3">
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <%= render "users/shared/error_messages", resource: resource %>
+    <div class="form-group">
+      <%= f.label :first_name %>
+      <%= f.text_field :first_name, class: "form-control" %>
+    </div>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "users/shared/error_messages", resource: resource %>
+    <div class="form-group">
+      <%= f.label :last_name %>
+      <%= f.text_field :last_name, class: "form-control" %>
+    </div>
+    
+    <div class="form-group">
+      <%= f.label :email %><br />
+      <%= f.email_field :email, autocomplete: "email", class: "form-control" %>
+    </div>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+    <div class="form-group">
+      <%= f.label :password %>
+      <% if @minimum_password_length %>
+      <em>(<%= @minimum_password_length %> characters minimum)</em>
+      <% end %><br />
+      <%= f.password_field :password, autocomplete: "new-password", class: "form-control" %>
+    </div>
 
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
+    <div class="form-group">
+      <%= f.label :password_confirmation %><br />
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
+    </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
+    <div class="form-group mt-3">
+      <%= f.label :profile_photo %>
+      <%= f.file_field :avatar, direct_upload: true, class: "form-control" %>
+    </div>
 
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
+    <div class="form-group mt-3 col-sm-5" id="filefield" data-controller="documents">
+      <%= f.label :identicards %>
+      <%= f.file_field :documents, direct_upload: true, multiple: true, data:{"documents-target": "fileField  "}, class: "form-control" %>
+      <div class="mt-2">
+        <%= button_tag "add_more", type: 'button', class: "btn btn-primary", data: {action: "documents#addDocument"} %>
+        <%= button_tag "remove", type: 'button', class: "btn btn-danger", data: {action: "documents#remove"} %>
+
+        <%#= link_to "add_more", "#", data: {action: "documents#addDocument"} %>
+        <%#= link_to "remove", "#", data: {action: "documents#remove"} %>
+      </div>
+    </div>
+
+    <div class="actions text-center">
+      <%= f.submit "Sign up", class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>  
 
 <%= render "users/shared/links" %>

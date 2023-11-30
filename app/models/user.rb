@@ -9,6 +9,10 @@ class User < ApplicationRecord
   has_many :customer_shipments, class_name: 'Shipment', foreign_key: :customer_id
   has_many :delivery_partner_shipments, class_name: 'Shipment', foreign_key: :delivery_partner_id
   
+  has_one_attached :avatar
+
+  has_many_attached :documents
+
   def active_for_authentication?
     super && self.is_active?
   end
