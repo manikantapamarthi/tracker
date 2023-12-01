@@ -3,8 +3,9 @@
   <h5><%= current_user&.email %></h5>
   <% if current_user&.admin? %>
     <p>you can check dashboard <%= link_to "here", admin_users_path  %></p>
-  <% else %>
+  <% elsif current_user&.delivery_partner? || current_user&.customer? %>
     <p>you can check your shipments <%= link_to "here", shipments_path %></p>
+
   <%end%>
   <%=
       link_to_if(current_user.nil?, "Login", new_user_session_path, class: 'btn btn-primary m-5') do

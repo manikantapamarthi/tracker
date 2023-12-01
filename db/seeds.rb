@@ -35,3 +35,13 @@ user.password = "test123"
 user.password_confirmation = "test123"
 user.is_active =  true
 user.save!
+
+user = User.new
+user.first_name = "customer"
+user.last_name = "partner"
+user.email = "cp1@track.com"
+user.role = "customer"
+user.password = "test123"
+user.password_confirmation = "test123"
+user.is_active =  true
+user.save!
