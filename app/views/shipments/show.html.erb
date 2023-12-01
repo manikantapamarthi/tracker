@@ -1,25 +1,30 @@
+
 <h2 class="text-center">Shipment Details</h2>
+<div class="shadow-lg p-3 mb-5 bg-body rounded">
+  <div class="row">
+    <p class="col-sm-2">ShipmentId:</p>
+    <p class="col"><%= @shipment.order_id %></p>
+  </div>
 
-<div class="row">
-  <p class="col-sm-2">ShipmentId:</p>
-  <p class="col"><%= @shipment.order_id %></p>
-</div>
+  <div class="row">
+    <p class="col-sm-2">Pickup Loacation: </p>
+    <p class="col"><%= @shipment.source_location %></p>
+  </div>
 
-<div class="row">
-  <p class="col-sm-2">Pickup Loacation: </p>
-  <p class="col"><%= @shipment.source_location %></p>
-</div>
+  <div class="row">
+    <p class="col-sm-2">Target Loacation: </p>
+    <p class="col"><%= @shipment.target_location %></p>
+  </div>
 
-<div class="row">
-  <p class="col-sm-2">Target Loacation: </p>
-  <p class="col"><%= @shipment.target_location %></p>
-</div>
-
-<div class="row">
-  <p class="col-sm-2">Item Description </p>
-  <p class="col"><%= @shipment.item_description %></p>
-</div>
-
-<%= render 'tracking_details', shipment: @shipment %>
+  <div class="row">
+    <p class="col-sm-2">Item Description </p>
+    <p class="col"><%= @shipment.item_description %></p>
+  </div>
+  <hr>
+  <div class="text-center">
+    <h2>Status</h2>
+    <%= render 'tracking_details', shipment: @shipment %>
+  </div>
+</div>  
 
 <%= link_to "Shipments", shipments_path, class: "btn btn-primary" %>

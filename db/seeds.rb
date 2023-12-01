@@ -10,6 +10,7 @@ user = User.new
 user.email = "admin@track.com"
 user.password = "test123"
 user.password_confirmation = "test123"
+user.is_active = true
 user.save!
 
 
@@ -18,8 +19,19 @@ user.save!
 user = User.new
 user.first_name = "delivary"
 user.last_name = "partner"
-user.email = "dp1@track.com"
+user.email = "dp@track.com"
 user.role = "delivery_partner"
 user.password = "test123"
 user.password_confirmation = "test123"
+user.is_active =  true
+user.save!
+
+user = User.new
+user.first_name = "customer"
+user.last_name = "partner"
+user.email = "cp@track.com"
+user.role = "delivery_partner"
+user.password = "test123"
+user.password_confirmation = "test123"
+user.is_active =  true
 user.save!

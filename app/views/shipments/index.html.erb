@@ -52,6 +52,7 @@
   <% else %>
     <h3 class="text-center">No shipments</h3>
   <% end %>
+<%== pagy_bootstrap_nav(@pagy) %>
 </turbo-frame>  
 
 <%= link_to "New Shipment", new_shipment_path, class: "btn btn-primary" if current_user.customer?%>

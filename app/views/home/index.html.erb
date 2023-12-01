@@ -1,7 +1,9 @@
 <section class="text-center m-5">
   <h1 class="text-center" >Welcome To Tacker</h1>
-  <% if current_user %>
-    <h5><%= current_user.email %></h5>
+  <h5><%= current_user&.email %></h5>
+  <% if current_user&.admin? %>
+    <p>you can check dashboard <%= link_to "here", admin_users_path  %></p>
+  <% else %>
     <p>you can check your shipments <%= link_to "here", shipments_path %></p>
   <%end%>
   <%=

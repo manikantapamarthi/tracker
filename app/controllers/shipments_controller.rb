@@ -9,9 +9,11 @@ class ShipmentsController < ApplicationController
       @shipments = current_user.customer_shipments
     when 'delivery_partner'
       @shipments = current_user.delivery_partner_shipments
+    else
+      @shipments = Shipment.all
     end
-  
     @shipments = @shipments.search(params[:query]) if params[:query].present?
+    @pagy, @shipments = pagy(@shipments)
   end
 
   def new
