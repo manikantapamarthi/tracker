@@ -30,6 +30,11 @@
       <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control" %>
     </div>
 
+    <div class="form-group">
+      <%= f.label :role %>
+      <%= f.select(:role, User.roles.keys.map {|r| [r.humanize, r] if r.in?(['customer', 'delivery_partner'])},{},class: 'form-select') %>
+    </div>
+
     <div class="form-group mt-3">
       <%= f.label :profile_photo %>
       <%= f.file_field :avatar, direct_upload: true, class: "form-control" %>
@@ -39,11 +44,8 @@
       <%= f.label :identicards %>
       <%= f.file_field :documents, direct_upload: true, multiple: true, data:{"documents-target": "fileField  "}, class: "form-control" %>
       <div class="mt-2">
-        <%= button_tag "add_more", type: 'button', class: "btn btn-primary", data: {action: "documents#addDocument"} %>
-        <%= button_tag "remove", type: 'button', class: "btn btn-danger", data: {action: "documents#remove"} %>
-
-        <%#= link_to "add_more", "#", data: {action: "documents#addDocument"} %>
-        <%#= link_to "remove", "#", data: {action: "documents#remove"} %>
+        <%= button_tag "Add More", type: 'button', class: "btn btn-primary", data: {action: "documents#addDocument"} %>
+        <%= button_tag "Remove", type: 'button', class: "btn btn-danger", data: {action: "documents#remove"} %>
       </div>
     </div>
 
