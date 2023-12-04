@@ -1,24 +1,26 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Ruby Version
 
-Things you may want to cover:
+ `ruby-3.2.2`
+ 
+Rails Version
 
-* Ruby version
+  `Rails 7.0.8`
 
-* System dependencies
+To run this application in your local environment 
 
-* Configuration
+clone app 
 
-* Database creation
+`https://github.com/manikantapamarthi/tracker.git`
 
-* Database initialization
+create the database 
 
-* How to run the test suite
+`rails db:create`
 
-* Services (job queues, cache servers, search engines, etc.)
+to run the migrations 
 
-* Deployment instructions
+`rails db:migrate`
 
-* ...
+to run the seeds 
+`rails db:seed`
