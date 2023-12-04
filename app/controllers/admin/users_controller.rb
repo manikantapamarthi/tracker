@@ -8,11 +8,7 @@ class Admin::UsersController < ApplicationController
   end
 
   def index
-    if params[:query].present?
-      @users = User.search(params[:query])
-    else
-      @users = User.all
-    end
+    @users = User.search(params[:query]).presence || User.all
     @pagy, @users = pagy(@users)
     authorize @users
   end
@@ -40,12 +36,7 @@ class Admin::UsersController < ApplicationController
   end
 
   def update
-    if params[:user][:password].blank?
-      params[:user].delete(:password)
-      params[:user].delete(:password_confirmation)
-    end
-
-  
+    remove_password_params_if_blank
     respond_to do |format|
       if @user.update(user_params)
         authorize @user
@@ -62,29 +53,14 @@ class Admin::UsersController < ApplicationController
   end
 
   def activate_user
-    @user.update_attribute(:is_active, true)
-    respond_to do |format|
-      format.turbo_stream do
-        render turbo_stream: turbo_stream.update(
-            "user_#{@user.id}",
-            partial: 'admin/users/active_buttons',
-            locals: { user: @user }
-          ) 
-      end
-    end
+    update_user_activity(true)
+    #Account activation email
   end
 
   def in_activate_user
-    @user.update_attribute(:is_active, false)
-    respond_to do |format|
-      format.turbo_stream do
-        render turbo_stream: turbo_stream.update(
-            "user_#{@user.id}",
-            partial: 'admin/users/active_buttons',
-            locals: { user: @user }
-          ) 
-      end
-    end
+    update_user_activity(false)
+    #TODO
+    #Account deactivation email
   end
 
   private
@@ -95,6 +71,25 @@ class Admin::UsersController < ApplicationController
 
   def send_welcome_email(user, password)
     UserMailer.welcome_email(user, password).deliver_later
+  end
+
+  def remove_password_params_if_blank
+    if params[:user][:password].blank?
+      params[:user].except!(:password, :password_confirmation)
+    end
+  end
+
+  def update_user_activity(active)
+    @user.update_attribute(:is_active, active)
+    respond_to do |format|
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.update(
+          "user_#{@user.id}",
+          partial: 'admin/users/active_buttons',
+          locals: { user: @user }
+        )
+      end
+    end
   end
 
   def user_params

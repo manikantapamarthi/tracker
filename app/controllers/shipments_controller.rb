@@ -1,18 +1,9 @@
 class ShipmentsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_shipment, only: [:show, :edit, :update, :destroy, :get_status, :track]
-
+  before_action :set_shipments, only: [:index]
 
   def index
-    case current_user.role
-    when 'customer'
-      @shipments = current_user.customer_shipments
-    when 'delivery_partner'
-      @shipments = current_user.delivery_partner_shipments
-    else
-      @shipments = Shipment.all
-    end
-    @shipments = @shipments.search(params[:query]) if params[:query].present?
     @pagy, @shipments = pagy(@shipments)
   end
 
@@ -85,5 +76,21 @@ class ShipmentsController < ApplicationController
   def set_shipment
     @shipment = Shipment.find(params[:id])
     redirect_to root_path, alert: 'Shipment not found' unless @shipment
+  end
+
+  def set_shipments
+    @shipments = determine_shipments
+    @shipments = @shipments.search(params[:query]) if params[:query].present?
+  end
+
+  def determine_shipments
+    case current_user.role
+    when 'customer'
+      current_user.customer_shipments
+    when 'delivery_partner'
+      current_user.delivery_partner_shipments
+    else
+      Shipment.all
+    end
   end
 end
