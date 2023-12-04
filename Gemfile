@@ -85,3 +85,5 @@ gem "pundit", "~> 2.3"
 
 gem "image_processing", ">= 1.2"
 gem 'pagy', '~> 6.2'
+gem 'cloudinary'
+gem "figaro"
