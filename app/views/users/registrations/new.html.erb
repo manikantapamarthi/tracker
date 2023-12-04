@@ -34,6 +34,11 @@
       <%= f.label :role %>
       <%= f.select(:role, User.roles.keys.map {|r| [r.humanize, r] if r.in?(['customer', 'delivery_partner'])},{},class: 'form-select') %>
     </div>
+    
+    <div class="form-group">
+      <%= f.label :phone_number %>
+      <%= f.telephone_field :phone_number, class: "form-control" %>
+    </div>
 
     <div class="form-group mt-3">
       <%= f.label :profile_photo %>

@@ -22,6 +22,7 @@
           <th>Pickup location</th>
           <th>Target Location</th>
           <th>Item Description</th>
+          <th>Delivery Partner</th>
           <th>Status</th>
           <th>Actions</th>
         </tr>
@@ -34,6 +35,7 @@
             <td><%= shipment.source_location %></td>
             <td><%= shipment.target_location %></td>
             <td><%= shipment.item_description %></td>
+            <td><%= shipment&.delivery_partner&.email %></td>
             <td>
               <%= form_with model: shipment do |f| %> 
                 <turbo-frame id="status_<%=shipment.id %>">

@@ -21,7 +21,7 @@
   </div>
   <div class="form-group mb-3 col-md-6">
     <%= f.label :delivery_partner %>
-    <%= f.select :delivery_partner_id, User.delivery_partner.map {|user| [user.first_name, user.id]},{}, class: "form-select" %>
+    <%= f.select :delivery_partner_id, User.active_delivery_partner.map {|user| [user.first_name, user.id]},{}, class: "form-select" %>
   </div>
   <div class="form-group mb-3 col-md-6">
     <%= f.submit  class: "btn btn-primary" %>

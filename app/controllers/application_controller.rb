@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
   private
   
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name, :role, :avatar, documents: []])
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name, :role,:phone_number, :avatar, documents: []])
   end
  
   def user_not_authorized
